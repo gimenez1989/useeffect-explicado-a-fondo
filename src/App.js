@@ -2,26 +2,52 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [cuenta, setCuenta] = useState(0);
+  const [mostrar, setMostrar] = useState(true);
 
-  useEffect(() => {
-    // Template sirve para concatenar string y variables
-    console.log(`la cuenta es ${cuenta}`)  
-    // Cambia el titulo de la pestaña por que cambia el estado cuenta
-    document.title = `la cuenta es ${cuenta}`
-  })
-
+  const change = () => {
+    setMostrar(!mostrar);
+  };
   return (
     <div className="App">
       <header className="App-header">
         <div>
-          <h1>La cuenta es: {cuenta}</h1>
-          {/*Al hacer click se setea cuenta */}
-          <button onClick={() => setCuenta(cuenta + 1)}>Aumentar</button>
+          <button
+            onClick={() => {
+              change();
+            }}
+          >
+            {
+            mostrar ? (
+              <p>Dejar de mostar</p> 
+             ) : (
+             <p>mostrar</p>
+             )}
+          </button>
+          {mostrar ? <Mousecolor /> : null}
         </div>
       </header>
     </div>
   );
+}
+
+function Mousecolor() {
+  const [color, setColor] = useState("yellow");
+
+  useEffect(() => {
+    const onMouseMove = (Evento) => {
+      if (Evento.clientX < window.innerWidth / 2) {
+        setColor("yellow");
+      } else {
+        setColor("blue");
+      }
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+  });
+
+  console.log("Ocurrio el render");
+
+  return <div style={{ height: "100vh", width: "100vh", background: color }} />;
 }
 
 export default App;
