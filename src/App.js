@@ -1,22 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
+  const [cuenta, setCuenta] = useState(0);
+
+  useEffect(() => {
+    // Template sirve para concatenar string y variables
+    console.log(`la cuenta es ${cuenta}`)  
+    // Cambia el titulo de la pestaña por que cambia el estado cuenta
+    document.title = `la cuenta es ${cuenta}`
+  })
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          <h1>La cuenta es: {cuenta}</h1>
+          {/*Al hacer click se setea cuenta */}
+          <button onClick={() => setCuenta(cuenta + 1)}>Aumentar</button>
+        </div>
       </header>
     </div>
   );
